@@ -475,7 +475,7 @@ while True:
 
         print(shop)
         shop_dict = {1: 'weapons', 2: 'items', 3: 'monsters'}
-        shop_items = {'weapons': [(Weapons("Demon Slayer", 200, 150, 'bleed', shop_weapon=True), 200), (Weapons("Cloud Blade", 250, 170, 'burn', shop_weapon=True), 250), (Weapons("Venom Scythe", 400, 300, 'slice', shop_weapon=True), 450), (Weapons("Flame Sickle", 600, 450, 'blunt', shop_weapon=True), 1000)], 'items': [], 'monsters': [(Monsters("Serpent", "griffin", 700), 555)]}
+        shop_items = {'weapons': [(Weapons("Demon Slayer", 200, 150, 'bleed', shop_weapon=True), 200), (Weapons("Cloud Blade", 250, 170, 'burn', shop_weapon=True), 250), (Weapons("Venom Scythe", 400, 300, 'slice', shop_weapon=True), 450), (Weapons("Flame Sickle", 600, 450, 'blunt', shop_weapon=True), 1000)], 'items': [], 'monsters': [(Monsters("Serpent", "griffin", 700, shop_item=True), 555)]}
         print('''
         1 - Weapons
         2 - Items
