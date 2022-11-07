@@ -566,4 +566,7 @@ while True:
     # - Add color to listing of weapons (colour based on w type)
     # - Add clans
     # - POTENTIAL (remove weapon from global list if someone adds to inv)
+<<<<<<< HEAD:PlayersClass.py
     # - Convert to PyGame
+=======
+>>>>>>> fb0032f199a5a898496166066cc561176c528f99:Fortune-Game.py
