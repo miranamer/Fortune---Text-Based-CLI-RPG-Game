@@ -30,10 +30,13 @@ class Players:
         Players.all_chars.append(self)
         if self.role == 'healer':
             self.healing = 10
+            self.healing_tokens = 3
     
     def __repr__(self): # very messy ik :(
-        return f"\033[34mName: \033[31m{self.name}\033[0m \033[34mRole:\033[31m \033[31m{self.role}\033[0m \033[34mRank:\033[31m \033[31m{self.rank}\033[0m \033[34mGold:\033[31m \033[31m{self.gold}\033[0m \033[34mDark Gold:\033[31m \033[31m{self.dark_gold}\033[0m\033[0m \033[34mTitle: \033[31m{self.title}\033[0m"
-
+        if self.role != "healer":
+            return f"\033[34mName: \033[31m{self.name}\033[0m \033[34mRole:\033[31m \033[31m{self.role}\033[0m \033[34mRank:\033[31m \033[31m{self.rank}\033[0m \033[34mGold:\033[31m \033[31m{self.gold}\033[0m \033[34mDark Gold:\033[31m \033[31m{self.dark_gold}\033[0m\033[0m \033[34mTitle: \033[31m{self.title}\033[0m \033[34mHP: \033[31m{self.hp}\033[0m"
+        else:
+            return f"\033[34mName: \033[31m{self.name}\033[0m \033[34mRole:\033[31m \033[31m{self.role}\033[0m \033[34mRank:\033[31m \033[31m{self.rank}\033[0m \033[34mGold:\033[31m \033[31m{self.gold}\033[0m \033[34mDark Gold:\033[31m \033[31m{self.dark_gold}\033[0m\033[0m \033[34mTitle: \033[31m{self.title}\033[0m \033[34mHP: \033[31m{self.hp}\033[0m \033[34mHealing: \033[31m{self.healing}\033[0m \033[34mHealing Tokens: \033[31m{self.healing_tokens}\033[0m"
     def rank_change(self, amt):
         self.rank += amt
         return f"\033[32mRank Now: {self.rank}\033[0m"
@@ -434,18 +437,22 @@ while True:
                 p1 = int(input("Who Are You:"))
             you = [i for i in Players.all_chars if i.role == 'healer'][p1-1]
 
-            counter2 = 0
-            for char in Players.all_chars:
-                counter2 += 1
-                print(f"{counter2} - {char.name}")
-            p2 = int(input("Who Do You Want To Heal: "))
-            while p2 <= 0 or p2 > counter2 or type(p2) != int:
-                print("Incorrect Choice!")
+            if you.healing_tokens < 1:
+                print(f"You Have No Healing Tokens!")
+            else:
+                counter2 = 0
+                for char in Players.all_chars:
+                    counter2 += 1
+                    print(f"{counter2} - {char.name}")
                 p2 = int(input("Who Do You Want To Heal: "))
-            to_heal = Players.all_chars[p2-1]
+                while p2 <= 0 or p2 > counter2 or type(p2) != int:
+                    print("Incorrect Choice!")
+                    p2 = int(input("Who Do You Want To Heal: "))
+                to_heal = Players.all_chars[p2-1]
 
-            to_heal.hp += you.healing
-            print(f"{to_heal.name} + {you.healing} HP -> (healed by {you.name})")
+                to_heal.hp += you.healing
+                you.healing_tokens -= 1
+                print(f"{to_heal.name} + {you.healing} HP -> (healed by {you.name})")
 
 
     if option == '12': # shop feature
@@ -559,3 +566,4 @@ while True:
     # - Add color to listing of weapons (colour based on w type)
     # - Add clans
     # - POTENTIAL (remove weapon from global list if someone adds to inv)
+    # - Convert to PyGame
